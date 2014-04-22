@@ -1,2 +1,2 @@
-# sampleTracker: A rails application or tracking samples at HIE
+# SemanticPageMaker: Application to allow creation of forms for semantically enabled web pages
 

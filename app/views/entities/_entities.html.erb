@@ -1,0 +1,19 @@
+<% if @entities.any? %>
+  <%= will_paginate @entities %>
+  <table class="table table-bordered table-striped table-hover" width="647">
+    <thead>
+      <tr>
+        <th>Entity ID</th>
+        <th>Entity Name</th>
+        <th>Expose as</th>
+        <th>View?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'entities/entities_table', collection: @entities, as: :entity %>
+    </tbody>
+  </table>
+  
+<% else %>
+  <p>No Entities found</p>
+<% end %>

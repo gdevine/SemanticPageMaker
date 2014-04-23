@@ -10,4 +10,12 @@ FactoryGirl.define do
       admin true
     end
   end
+  
+  factory :entity do
+    name "Facility"
+    exposeAs  "FacilityText"
+    freetext true
+    association :creator, :factory  => :user
+  end
+  
 end

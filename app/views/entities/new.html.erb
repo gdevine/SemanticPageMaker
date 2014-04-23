@@ -1,0 +1,19 @@
+<% provide(:title, 'New Entity') %>
+<h1>New Entity</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@entity) do |f| %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      
+      <%= f.label :exposeAs %>
+      <%= f.text_field :exposeAs %>
+
+      <%= f.label :freetext %>
+      <%= f.check_box :freetext %>
+
+      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

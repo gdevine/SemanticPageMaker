@@ -1,0 +1,22 @@
+<% provide(:title, "Edit Entity") %>
+<% provide(:pageheading, 'Edit Entity '+ @entity.name ) %>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@entity) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name, 'Entity Name' %>
+      <%= f.text_field :name %>
+      
+      <%= f.label :exposeAs, "Expose as" %>
+      <%= f.text_field :exposeAs %>
+      
+      <%= f.label :freetext %>
+      <%= f.check_box :freetext %>
+
+      <%= f.submit "Update Entity", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

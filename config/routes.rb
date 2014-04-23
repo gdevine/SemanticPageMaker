@@ -1,7 +1,9 @@
 SampleTracker::Application.routes.draw do
   
+  get "entities/new"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :entities
   
   root  'static_pages#home'
   match '/register',    to: 'users#new',    via: 'get'

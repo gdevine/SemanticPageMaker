@@ -1,5 +1,5 @@
 def full_title(page_title)
-  base_title = "HIE Sample Tracker"
+  base_title = "Semantic Page Maker"
   if page_title.empty?
     base_title
   else

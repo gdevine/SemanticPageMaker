@@ -2,7 +2,6 @@ class EntitiesController < ApplicationController
   before_action :signed_in_user, only: [:index, :new, :show, :update, :edit, :create, :destroy]
   before_action :correct_user,   only: :destroy
   
-  
   def index   
     @entities = Entity.paginate(page: params[:page])
   end

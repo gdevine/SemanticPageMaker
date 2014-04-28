@@ -2,7 +2,9 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   before_create :create_remember_token
   
-  has_many :entities, :class_name => 'Entity', :foreign_key => 'creator_id'
+  has_many :entities, :class_name => 'Entity', :foreign_key => 'creator_id'  
+  has_many :fields, :class_name => 'Field', :foreign_key => 'creator_id'
+  
   
   validates :firstname, presence: true , length: { maximum: 50 }
   validates :surname, presence: true, length: { maximum: 50 }

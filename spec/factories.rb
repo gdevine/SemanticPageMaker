@@ -18,4 +18,11 @@ FactoryGirl.define do
     association :creator, :factory  => :user
   end
   
+  factory :field do
+    name "Address"
+    fieldtype  "Address"
+    uri 'mydomain/address'
+    association :creator, :factory  => :user
+  end
+  
 end

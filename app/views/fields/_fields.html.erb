@@ -1,0 +1,18 @@
+<% if @fields.any? %>
+  <%= will_paginate @fields %>
+  <table class="table table-bordered table-striped table-hover" width="647">
+    <thead>
+      <tr>
+        <th>Field ID</th>
+        <th>Field Name</th>
+        <th>Property String</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'fields/fields_table', collection: @fields, as: :field %>
+    </tbody>
+  </table>
+  
+<% else %>
+  <p>No Fields found</p>
+<% end %>

@@ -15,7 +15,6 @@ class EntitiesController < ApplicationController
   end
   
   def create
-    # @entity = Entity.new(entity_params)
     @entity = current_user.entities.build(entity_params)
     if @entity.save
       flash[:success] = "Entity created!"

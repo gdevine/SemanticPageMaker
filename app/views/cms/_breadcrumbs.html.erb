@@ -1,0 +1,3 @@
+<% for page in @cms_page.ancestors.reverse %>
+  <%= active_link_to page.label, page.full_path %> &gt;
+<% end %>

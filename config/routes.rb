@@ -1,9 +1,13 @@
 SampleTracker::Application.routes.draw do
   
+
+
+  get "fields/new"
   get "entities/new"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :entities
+  resources :fields
   
   root  'static_pages#home'
   match '/register',    to: 'users#new',    via: 'get'
@@ -12,6 +16,10 @@ SampleTracker::Application.routes.draw do
   match '/contact',     to: 'static_pages#contact', via: 'get'
   match '/signin',      to: 'sessions#new',         via: 'get'
   match '/signout',     to: 'sessions#destroy',     via: 'delete'
+  
+  comfy_route :cms_admin, :path => '/cms'
+  # Make sure this routeset is defined last
+  comfy_route :cms, :path => '/', :sitemap => false
                             
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,41 @@
+<% provide(:title, 'Field View') %>
+<% provide(:pageheading, 'Field '+ @field.name) %>
+
+<!-- Add edit/delete buttons if current user -->
+<% if current_user?(@field.creator) %> 
+  <div class="row">  
+    <div class="span2 offset8">
+      <%= button_to "Edit Field", {:action => 'edit' }, :method => :get, :class=>"btn btn-block" %>
+    </div>
+    <div class="span2">
+      <%= button_to "Delete Field", @field, method: :delete, data: { confirm: "Are you sure?" }, title: @field.name, :class=>"btn btn-block btn-danger" %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">  
+  <div class="span3 offset3">
+    <h4>Field ID</h4>
+  </div>
+  <div class="span3 offset1">
+    <h4><%= @field.id %></h4>
+  </div>
+</div>
+
+<div class="row">  
+  <div class="span3 offset3">
+    <h4>Field Name</h4>
+  </div>
+  <div class="span3 offset1">
+    <h4><%= @field.name %></h4>
+  </div>
+</div>
+
+<div class="row">   
+  <div class="span3 offset3">
+    <h4>Property</h4>
+  </div>
+  <div class="span3 offset1">
+    <h4><%= @field.property %></h4>
+  </div>
+</div>

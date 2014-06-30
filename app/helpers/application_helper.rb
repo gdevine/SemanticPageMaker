@@ -2,7 +2,7 @@ module ApplicationHelper
 
    # Returns the full title on a per-page basis.
   def full_title(page_title)
-    base_title = "Semantic Page Maker"
+    base_title = "HIE Data Pages"
     if page_title.empty?
       base_title
     else
@@ -19,12 +19,12 @@ module ApplicationHelper
   end
   
   def show_minibar?(current_path)
-    if current_path == root_path && signed_in? 
-      return true
-    elsif ![root_path, about_path, contact_path, help_path, users_path, register_path, sessions_path, signin_path].include? current_path  
-      return true
-    else
+    if [root_path, about_path, contact_path, help_path, users_path, register_path, sessions_path, signin_path].include? current_path  
       return false
+    elsif current_path.include? "/data-management"
+      return false
+    else
+      return true
     end     
   end
 

@@ -1,0 +1,19 @@
+<% provide(:title, "Edit Field") %>
+<% provide(:pageheading, 'Edit Field '+ @field.name ) %>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@field) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name, 'Field Name' %>
+      <%= f.text_field :name %>
+
+      <%= f.label :property, 'Property String' %>
+      <%= f.text_field :property %>
+      
+      <%= f.submit "Update Field", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

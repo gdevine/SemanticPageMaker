@@ -7,7 +7,12 @@ class EntitiesController < ApplicationController
   end
   
   def new
+    # @entity= Entity.new 
+    # @entity_fields = @entity.entity_fields.build
+    # @field = @entity_fields.build_field
+    
     @entity = Entity.new
+    @entity.entity_fields.build.build_field
   end
   
   def show

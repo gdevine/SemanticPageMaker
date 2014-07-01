@@ -3,7 +3,6 @@
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(@entity) do |f| %>
-
       <%= f.label :name %>
       <%= f.text_field :name %>
       
@@ -12,8 +11,14 @@
 
       <%= f.label :freetext %>
       <%= f.check_box :freetext %>
-
+      
+      <%= f.fields_for :entity_fields do |ef| %>
+        <%= ef.label :multiple %>
+        <%= ef.check_box :multiple %>
+      <% end %>
+      
       <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+      
     <% end %>
   </div>
 </div>

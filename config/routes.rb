@@ -4,10 +4,12 @@ SampleTracker::Application.routes.draw do
 
   get "fields/new"
   get "entities/new"
+  get "entries/new"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :entities
   resources :fields
+  resources :entries
   
   root  'static_pages#home'
   match '/register',    to: 'users#new',    via: 'get'

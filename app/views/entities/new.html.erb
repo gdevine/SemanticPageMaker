@@ -13,8 +13,14 @@
       <%= f.check_box :freetext %>
       
       <%= f.fields_for :entity_fields do |ef| %>
+        <%= ef.label :field_id, 'Field' %>
+        <%= ef.collection_select(:field_id, Field.all, :id, :name, include_blank:true) %>
+        
         <%= ef.label :multiple %>
         <%= ef.check_box :multiple %>
+        
+        <%= ef.label :exposeAs %>
+        <%= ef.text_field :exposeAs %>
       <% end %>
       
       <%= f.submit "Submit", class: "btn btn-large btn-primary" %>

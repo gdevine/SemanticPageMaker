@@ -7,10 +7,6 @@ class EntitiesController < ApplicationController
   end
   
   def new
-    # @entity= Entity.new 
-    # @entity_fields = @entity.entity_fields.build
-    # @field = @entity_fields.build_field
-    
     @entity = Entity.new
     @entity.entity_fields.build.build_field
   end
@@ -52,7 +48,7 @@ class EntitiesController < ApplicationController
   private
 
     def entity_params
-      params.require(:entity).permit(:name, :exposeAs, :freetext)
+      params.require(:entity).permit(:name, :exposeAs, :freetext, entity_fields_attributes: [:id, :multiple, :entity_id, :field_id, :exposeAs])
     end
     
     def correct_user

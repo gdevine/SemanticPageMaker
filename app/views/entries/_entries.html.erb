@@ -1,0 +1,18 @@
+<% if @entries.any? %>
+  <%= will_paginate @entries %>
+  <table class="table table-bordered table-striped table-hover" width="647">
+    <thead>
+      <tr>
+        <th>Entry ID</th>
+        <th>Entry Type</th>
+        <th>View?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'entries/entries_table', collection: @entries, as: :entry %>
+    </tbody>
+  </table>
+  
+<% else %>
+  <p>No Entries found</p>
+<% end %>

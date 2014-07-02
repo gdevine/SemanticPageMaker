@@ -9,10 +9,12 @@ class EntitiesController < ApplicationController
   def new
     @entity = Entity.new
     @entity.entity_fields.build.build_field
+    @entities = Entity.all
   end
   
   def show
     @entity = Entity.find(params[:id])
+    @entities = Entity.all
   end
   
   def create
@@ -27,6 +29,7 @@ class EntitiesController < ApplicationController
   
    def edit
     @entity = Entity.find(params[:id])
+    @entities = Entity.all
   end
      
   def update

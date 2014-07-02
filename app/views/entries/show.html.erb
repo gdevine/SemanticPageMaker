@@ -1,0 +1,33 @@
+<% provide(:title, 'Entry View') %>
+<% provide(:pageheading, @entity.name+' Entry') %>
+
+<!-- Add edit/delete buttons if current user -->
+<% if current_user?(@entry.creator) %> 
+  <div class="row">  
+    <div class="span2 offset8">
+      <%= button_to "Edit Entry", {:action => 'edit' }, :method => :get, :class=>"btn btn-block" %>
+    </div>
+    <div class="span2">
+      <%= button_to "Delete Entry", @entry, method: :delete, data: { confirm: "Are you sure?" }, title: @entry.id, :class=>"btn btn-block btn-danger" %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">  
+  <div class="span3 offset3">
+    <h4>Entry ID</h4>
+  </div>
+  <div class="span3 offset1">
+    <h4><%= @entry.id %></h4>
+  </div>
+</div>
+
+<div class="row">  
+  <div class="span3 offset3">
+    <h4>Entry Type</h4>
+  </div>
+  <div class="span3 offset1">
+    <h4><%= @entity.name %></h4>
+  </div>
+</div>
+

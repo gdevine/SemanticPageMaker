@@ -4,14 +4,17 @@ class FieldsController < ApplicationController
   
   def index   
     @fields = Field.paginate(page: params[:page])
+    @entities = Entity.all
   end
   
   def new
     @field = Field.new
+    @entities = Entity.all
   end
   
   def show
     @field = Field.find(params[:id])
+    @entities = Entity.all
   end
   
   def create
@@ -26,6 +29,7 @@ class FieldsController < ApplicationController
   
    def edit
     @field = Field.find(params[:id])
+    @entities = Entity.all
   end
      
   def update

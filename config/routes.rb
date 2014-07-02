@@ -1,10 +1,9 @@
 SampleTracker::Application.routes.draw do
   
-
-
+  get "entries/new"
   get "fields/new"
   get "entities/new"
-  get "entries/new"
+  
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :entities

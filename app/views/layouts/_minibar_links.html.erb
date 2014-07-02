@@ -21,4 +21,21 @@
       </li>
     </ul>
   </li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entries<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li>
+        <%= link_to 'View All', entries_path, :id => 'entries_index' %>
+      </li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add New Entry<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <% for entity in @entities %>	
+        <li><%= link_to entity.name, new_entry_path(entity_id:entity.id), :id => 'fields_new' %> 
+        </li>
+      <% end %>
+    </ul>
+  </li>
 </ul>

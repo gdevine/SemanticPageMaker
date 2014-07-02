@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   
   has_many :entities, :class_name => 'Entity', :foreign_key => 'creator_id'  
   has_many :fields, :class_name => 'Field', :foreign_key => 'creator_id'
+  has_many :entries, :class_name => 'Entry', :foreign_key => 'creator_id'
   
   
   validates :firstname, presence: true , length: { maximum: 50 }

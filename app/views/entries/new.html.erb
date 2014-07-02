@@ -1,0 +1,15 @@
+<% provide(:title, 'New Entry') %>
+<h1>New <%= @entity.name %> Entry </h1>
+<div class="row">
+  <div class="span6 offset3">
+    <% for field in @entity.fields %>	
+      <%= @entity.entity_fields.find_by(field_id=field.id).exposeAs %>
+    <% end %>
+    <%= form_for(@entry) do |f| %>
+      <%= f.hidden_field :entity_id, :value => @entity.id %>  
+      <%= f.hidden_field :fields_collection, :value => @entity.id %>  
+      <%= f.hidden_field :entities_collection, :value => @entity.id %>  
+      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

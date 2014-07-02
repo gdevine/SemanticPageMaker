@@ -50,7 +50,7 @@ class FieldsController < ApplicationController
   private
 
     def field_params
-      params.require(:field).permit(:name, :property)
+      params.require(:field).permit(:name, :fieldtype, :property)
     end
     
     def correct_user

@@ -2,9 +2,13 @@
 <h1>New <%= @entity.name %> Entry </h1>
 <div class="row">
   <div class="span6 offset3">
-    <% for field in @entity.fields %>	
-      <%= @entity.entity_fields.find_by(field_id=field.id).exposeAs %>
+    
+    <% for ef in @entity.entity_fields.to_a %>
+        <%= ef.exposeAs %>
+        (<%= ef.field.property %>)
+        <%= text_field "", "name", "size" => 20 %>
     <% end %>
+    
     <%= form_for(@entry) do |f| %>
       <%= f.hidden_field :entity_id, :value => @entity.id %>  
       <%= f.hidden_field :fields_collection, :value => @entity.id %>  

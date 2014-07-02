@@ -34,6 +34,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
+    awesome_nested_fields (0.6.4)
+      rails (>= 3.0.0)
     bcrypt-ruby (3.1.2)
     bootstrap-sass (3.1.0.0)
       sass (~> 3.2)
@@ -226,6 +228,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_nested_fields
   bcrypt-ruby (= 3.1.2)
   bootstrap-sass (= 3.1.0)
   bootstrap-will_paginate (= 0.0.9)

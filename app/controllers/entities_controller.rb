@@ -29,6 +29,7 @@ class EntitiesController < ApplicationController
   
    def edit
     @entity = Entity.find(params[:id])
+    @entity.entity_fields.build.build_field
     @entities = Entity.all
   end
      

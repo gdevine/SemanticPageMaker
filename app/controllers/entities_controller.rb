@@ -19,6 +19,7 @@ class EntitiesController < ApplicationController
   
   def create
     @entity = current_user.entities.build(entity_params)
+    @entities = Entity.all
     if @entity.save
       flash[:success] = "Entity created!"
       redirect_to @entity

@@ -10,6 +10,7 @@ class EntriesController < ApplicationController
   def new
     @entry = Entry.new
     @entity = Entity.find(params[:entity_id])
+    @entry.field_instances.build
     @entities = Entity.all
   end
   
@@ -25,6 +26,14 @@ class EntriesController < ApplicationController
   
   def show
     @entry = Entry.find(params[:id])
+    @mylist = []
+    for efield in @entry.field_instances
+      myhash = Hash.new
+      myhash['label'] = efield.exposeAs
+      myhash['predicate'] = (Field.find(efield.field_id)).property
+      myhash['answer'] = efield.answer
+      @mylist << myhash 
+    end
     @entity = Entity.find(@entry.entity_id)
     @entities = Entity.all
   end
@@ -34,8 +43,12 @@ class EntriesController < ApplicationController
   
     def entry_params
       params.require(:entry).permit(:entity_id, 
-                                     :fields_collection, 
-                                     :entities_collection)
+                                     :entry_id, 
+                                     :field_id)
+    end
+    
+    def entry_params
+      params.require(:entry).permit(:entity_id, :entry_id, :field_id, field_instances_attributes: [:entry_id, :field_id, :exposeAs, :answer])
     end
     
     def correct_user

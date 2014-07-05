@@ -31,3 +31,15 @@
   </div>
 </div>
 
+<h2>Fields</h2>
+
+<% for field in @mylist %>
+  <div class="row">  
+	<div class="col-md-6">
+	  <h5><%= field['label'] %></h5>
+	</div>
+	<div class="col-md-6">
+	  <h4 property="<%= field['predicate'] %>"><%= field['answer'] %></h4>
+	</div>
+  </div>
+<% end%>

@@ -12,26 +12,28 @@
       <%= f.label :freetext %>
       <%= f.check_box :freetext %>
       <h2>Fields</h2>
-      <div class="items well">
-	      <%= f.nested_fields_for :entity_fields, :id=>"duplicatable_nested_form" do |ef| %>
-	        <fieldset class="item">
-		        <%= ef.label :field_id, 'Field' %>
-		        <%= ef.collection_select(:field_id, Field.all, :id, :name, include_blank:true) %>
-		        
-		        <%= ef.label :multiple %>
-		        <%= ef.check_box :multiple %>
-		        
-		        <%= ef.label :exposeAs %>
-		        <%= ef.text_field :exposeAs %>
-		        
-		        <a href="#" class="remove">remove</a>
-
-		        <%= f.hidden_field :id %>
-		        <%= f.hidden_field :_destroy %>
-		    </fieldset>
-	      <% end %>
-	  </div>
-      <a href="#" class="add">add new field</a>
+      <div id="nest-1">
+	      <div class="items well">
+		      <%= f.nested_fields_for :entity_fields, :id=>"duplicatable_nested_form" do |ef| %>
+		        <fieldset class="item">
+			        <%= ef.label :field_id, 'Field' %>
+			        <%= ef.collection_select(:field_id, Field.all, :id, :name, include_blank:true) %>
+			        
+			        <%= ef.label :multiple %>
+			        <%= ef.check_box :multiple %>
+			        
+			        <%= ef.label :exposeAs %>
+			        <%= ef.text_field :exposeAs %>
+			        
+			        <a href="#" class="remove">remove</a>
+	
+			        <%= f.hidden_field :id %>
+			        <%= f.hidden_field :_destroy %>
+			    </fieldset>
+		      <% end %>
+		  </div>
+          <a href="#" class="add">add new field</a>
+      </div>
       
       <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
       

@@ -17,7 +17,11 @@
 //= require jquery.nested-fields
 //= require_tree .
 
-
 $(document).ready(function(e) {
-  $('FORM').nestedFields();
+  var nests = [];
+  $("[id^='nest']").each(function(){ 
+  	nests.push('#'+this.id); 
+  });
+  $(nests.toString()).nestedFields();
 });
+

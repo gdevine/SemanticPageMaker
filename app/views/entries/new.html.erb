@@ -1,18 +1,37 @@
 <% provide(:title, 'New Entry') %>
-<h1>New <%= @entity.name %> Entry </h1>
+<h1>New <%= @entity.name %> </h1>
 <div class="row">
   <div class="span6 offset3">
     
-    <% for ef in @entity.entity_fields.to_a %>
-        <%= ef.exposeAs %>
-        (<%= ef.field.property %>)
-        <%= text_field "", "name", "size" => 20 %>
-    <% end %>
     
     <%= form_for(@entry) do |f| %>
-      <%= f.hidden_field :entity_id, :value => @entity.id %>  
-      <%= f.hidden_field :fields_collection, :value => @entity.id %>  
-      <%= f.hidden_field :entities_collection, :value => @entity.id %>  
+      <%= f.hidden_field :entity_id, :value => @entity.id %>     
+      
+      <h2>Fields</h2>
+      
+      <% for ef in @entity.entity_fields.to_a %>
+        <div id="nest-<%= ef.id.to_s %>">
+	        <div class="items well">
+		      <%= f.nested_fields_for :field_instances, :id=>"duplicatable_nested_form" do |fi| %>
+		        <fieldset class="item">
+			        
+			        <%= fi.label :answer, ef.exposeAs %>
+			        <%= fi.text_field :answer %>
+			        
+	                <%= fi.hidden_field :field_id, :value => ef.field_id %>  
+	                <%= fi.hidden_field :exposeAs, :value => ef.exposeAs %> 
+			        
+			        <a href="#" class="remove">remove</a>
+	
+			        <%= f.hidden_field :id %>
+			        <%= f.hidden_field :_destroy %>
+			    </fieldset>
+		      <% end %>
+		    </div>  
+	        <a href="#" class="add">add new field</a>
+	    </div>
+      <% end %>
+      
       <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

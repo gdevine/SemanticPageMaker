@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702053210) do
+ActiveRecord::Schema.define(version: 20140705001757) do
 
   create_table "comfy_cms_blocks", force: true do |t|
     t.string   "identifier",                      null: false
@@ -154,9 +154,17 @@ ActiveRecord::Schema.define(version: 20140702053210) do
     t.integer  "entity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "entities_collection"
-    t.integer  "fields_collection"
     t.integer  "creator_id"
+  end
+
+  create_table "field_instances", force: true do |t|
+    t.integer  "creator_id"
+    t.integer  "entry_id"
+    t.integer  "field_id"
+    t.string   "answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "exposeAs"
   end
 
   create_table "fields", force: true do |t|

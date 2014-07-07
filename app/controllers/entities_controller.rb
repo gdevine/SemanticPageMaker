@@ -9,6 +9,7 @@ class EntitiesController < ApplicationController
   def new
     @entity = Entity.new
     @entity.entity_fields.build.build_field
+    @entity.links.build.build_entity
     @entities = Entity.all
   end
   
@@ -31,6 +32,7 @@ class EntitiesController < ApplicationController
    def edit
     @entity = Entity.find(params[:id])
     @entity.entity_fields.build.build_field
+    @entity.links.build.build_entity
     @entities = Entity.all
   end
      
@@ -53,7 +55,11 @@ class EntitiesController < ApplicationController
   private
 
     def entity_params
-      params.require(:entity).permit(:name, :exposeAs, :freetext, entity_fields_attributes: [:id, :multiple, :entity_id, :field_id, :exposeAs])
+      params.require(:entity).permit(:name, 
+                                     :exposeAs, 
+                                     :freetext, 
+                                     entity_fields_attributes: [:id, :multiple, :entity_id, :field_id, :exposeAs],
+                                     links_attributes: [:id, :multiple, :entity_id, :link_id, :exposeAs, :property])
     end
     
     def correct_user

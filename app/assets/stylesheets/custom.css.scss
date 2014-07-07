@@ -1,8 +1,5 @@
 @import "bootstrap";
 
-/* mixins, variables, etc. */
-
-$gray-mediumlight: #eaeaea;
 
 /* universal */
 
@@ -48,7 +45,6 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $gray-light;
 }
 
 p {
@@ -63,10 +59,10 @@ p {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: white;
+  color: #FFF;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  padding-top: 10px;
   font-weight: bold;
   line-height: 1;
   &:hover {
@@ -80,14 +76,7 @@ p {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid $gray-mediumlight;
-  color: $gray-light;
-  a {
-    color: $gray;
-    &:hover {
-      color: $gray-darker;
-    }
-  }
+  border-top: 1px solid;
   small {
     float: left;
   }
@@ -126,7 +115,7 @@ $gray-mediumlight: #eaeaea;
 aside {
   section {
     padding: 10px 0;
-    border-top: 1px solid $gray-lighter;
+    border-top: 1px solid;
     &:first-child {
       border: 0;
       padding-top: 0;
@@ -182,9 +171,29 @@ input {
   li {
     overflow: auto;
     padding: 10px 0;
-    border-top: 1px solid $gray-lighter;
+    border-top: 1px solid;
     &:last-child {
-      border-bottom: 1px solid $gray-lighter;
+      border-bottom: 1px solid;
     }
   }
+}
+
+/* Horizontal line on a bootstrap row class*/
+.rowline {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid;
+}
+
+/* Spacings */
+.bottomspace {
+  padding-bottom: 30px;
+}
+
+.topspace50 {
+  padding-top: 50px;
+}
+
+.topspace20 {
+  padding-top: 20px;
 }

@@ -11,6 +11,7 @@ class EntriesController < ApplicationController
     @entry = Entry.new
     @entity = Entity.find(params[:entity_id])
     @entry.field_instances.build
+    @entry.entity_instances.build
     @entities = Entity.all
   end
   
@@ -26,13 +27,23 @@ class EntriesController < ApplicationController
   
   def show
     @entry = Entry.find(params[:id])
-    @mylist = []
+    
+    @fieldlist = []
     for efield in @entry.field_instances
       myhash = Hash.new
       myhash['label'] = efield.exposeAs
       myhash['predicate'] = (Field.find(efield.field_id)).property
       myhash['answer'] = efield.answer
-      @mylist << myhash 
+      @fieldlist << myhash 
+    end
+    
+    @entitylist = []
+    for ent in @entry.entity_instances
+      myhash = Hash.new
+      myhash['label'] = ent.exposeAs
+      # myhash['predicate'] = (Field.find(efield.field_id)).property
+      myhash['answer'] = ent
+      @entitylist << myhash 
     end
     @entity = Entity.find(@entry.entity_id)
     @entities = Entity.all
@@ -43,12 +54,10 @@ class EntriesController < ApplicationController
   
     def entry_params
       params.require(:entry).permit(:entity_id, 
-                                     :entry_id, 
-                                     :field_id)
-    end
-    
-    def entry_params
-      params.require(:entry).permit(:entity_id, :entry_id, :field_id, field_instances_attributes: [:entry_id, :field_id, :exposeAs, :answer])
+                                    :entry_id, 
+                                    :field_id, 
+                                    field_instances_attributes: [:entry_id, :field_id, :exposeAs, :answer],
+                                    entity_instances_attributes: [:entry_id, :link_id, :exposeAs])
     end
     
     def correct_user

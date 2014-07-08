@@ -35,14 +35,14 @@
 		        <div class="form-group topspace20">
 			      <%= ef.label :field_id, 'Field', class:"col-lg-2 control-label" %>
 			      <div class="col-lg-8">
-			        <%= ef.collection_select(:field_id, Field.all, :id, :name, {}, {:class=>"form-control", :id=>"select", :include_blank=>true}) %>
+			        <%= ef.collection_select(:field_id, Field.all, :id, :name, {:include_blank=>true}, {:class=>"form-control", :id=>"select"}) %>
 			      </div>
 			    </div>
 			    
 			    <div class="form-group">
 			      <%= ef.label :multiple, "Allow multiple?", :class => "col-lg-2 control-label" %>
 			      <div class="col-lg-1 checkbox">
-			        <%= ef.check_box :multiple, :class => "form-control" %>
+			        <%= ef.check_box :multiple %>
 			      </div>
 			    </div>
 			    
@@ -70,6 +70,7 @@
           <a href="#" class="add">Add new field</a>
         </div>
       </div>
+  </div>
   
   <legend class="topspace50">Linked Entities</legend>
   <div id="nest-100">
@@ -79,14 +80,14 @@
 		        <div class="form-group topspace20">
 			      <%= link.label :link_id, 'Link', class:"col-lg-2 control-label" %>
 			      <div class="col-lg-8">
-			        <%= link.collection_select(:link_id, Entity.all, :id, :name, {}, {:class=>"form-control", :id=>"select", :include_blank=>true}) %>
+			        <%= link.collection_select(:link_id, Entity.all, :id, :name, {:include_blank=>true}, {:class=>"form-control", :id=>"select"}) %>
 			      </div>
 			    </div>
 			    
 			    <div class="form-group">
 			      <%= link.label :multiple, "Allow multiple?", :class => "col-lg-2 control-label" %>
 			      <div class="col-lg-1 checkbox">
-			        <%= link.check_box :multiple, {class:"form-control"} %>
+			        <%= link.check_box :multiple %>
 			      </div>
 			    </div>
 			    

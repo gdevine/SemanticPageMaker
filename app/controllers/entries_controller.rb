@@ -29,22 +29,27 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     
     @fieldlist = []
-    for efield in @entry.field_instances
-      myhash = Hash.new
-      myhash['label'] = efield.exposeAs
-      myhash['predicate'] = (Field.find(efield.field_id)).property
-      myhash['answer'] = efield.answer
-      @fieldlist << myhash 
+    if !@entry.field_instances.empty?
+      for efield in @entry.field_instances
+        myhash = Hash.new
+        myhash['label'] = efield.exposeAs
+        myhash['predicate'] = (Field.find(efield.field_id)).property
+        myhash['answer'] = efield.answer
+        @fieldlist << myhash 
+      end
+    end
+      
+    @entitylist = []
+    if !@entry.entity_instances.empty?
+      for ent in @entry.entity_instances
+        myhash = Hash.new
+        myhash['label'] = ent.exposeAs
+        # myhash['predicate'] = (Field.find(efield.field_id)).property
+        myhash['answer'] = ent
+        @entitylist << myhash 
+      end
     end
     
-    @entitylist = []
-    for ent in @entry.entity_instances
-      myhash = Hash.new
-      myhash['label'] = ent.exposeAs
-      # myhash['predicate'] = (Field.find(efield.field_id)).property
-      myhash['answer'] = ent
-      @entitylist << myhash 
-    end
     @entity = Entity.find(@entry.entity_id)
     @entities = Entity.all
   end

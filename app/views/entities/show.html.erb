@@ -3,49 +3,112 @@
 
 <!-- Add edit/delete buttons if current user -->
 <% if current_user?(@entity.creator) %> 
-  <div class="row">  
-    <!-- <div class="span2 offset8"> -->
-    <div class="col-md-2">
-      <%= button_to "Edit Entity", {:action => 'edit' }, :method => :get, :class=>"btn btn-block" %>
-    </div>
-    <div class="col-md-2">
-      <%= button_to "Delete Entity", @entity, method: :delete, data: { confirm: "Are you sure?" }, title: @entity.name, :class=>"btn btn-block btn-danger" %>
-    </div>
+  <div class="row"> 
+	  <div class="col-xs-12 col-sm-2 col-sm-push-10">
+		<a class="btn btn-block btn-default" data-toggle="dropdown" href="#" id="options_button">
+		  Options
+		  <span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+		    <li><%= link_to "Edit Entity", :action => 'edit' %></li>
+		    <li><%= link_to "Delete Entry", @entity, :method => :delete, data: { confirm: "Are you sure?" }, :class=>"redtext" %></li>
+		</ul>
+	  </div>
   </div>
 <% end %>
 
-<div class="row">  
-  <div class="span3 offset3">
-    <h4>Entity ID</h4>
-  </div>
-  <div class="span3 offset1">
-    <h4><%= @entity.id %></h4>
-  </div>
+<div class="topspace50">
+	<div class="row">  
+	  <div class="col-md-offset-4 col-md-2">
+	    <h4 class="text-left">Entity ID</h4>
+	  </div>
+	  <div class="col-md-2">
+	    <h4 class="text-muted text-center"><%= @entity.id %></h4>
+	  </div>
+	</div>
+	
+	<div class="row">  
+	  <div class="col-md-offset-4 col-md-2">
+	    <h4 class="text-left">Entity Name</h4>
+	  </div>
+	  <div class="col-md-2">
+	    <h4 class="text-muted text-center"><%= @entity.name %></h4>
+	  </div>
+	</div>
+	
+	<div class="row">  
+	  <div class="col-md-offset-4 col-md-2">
+	    <h4 class="text-left">Expose as</h4>
+	  </div>
+	  <div class="col-md-2">
+	    <h4 class="text-muted text-center"><%= @entity.exposeAs %></h4>
+	  </div>
+	</div>
+	
+	<div class="row">   
+	  <div class="col-md-offset-4 col-md-2">
+	    <h4 class="text-left">Allow Free Text?</h4>
+	  </div>
+	  <div class="col-md-2">
+	    <h4 class="text-muted text-center"><%= @entity.freetext %></h4>
+	  </div>
+	</div>
 </div>
 
+<legend class="topspace50">Included Fields</legend>
 <div class="row">  
-  <div class="span3 offset3">
-    <h4>Entity Name</h4>
+	<div class="col-md-3 text-center">
+	  <h4>Field ID</h4>
+	</div>
+	<div class="col-md-3 text-center">
+	  <h4>Name</h4>
+	</div>
+	<div class="col-md-3 text-center">
+	  <h4>Exposed as</h4>
+	</div>
+	<div class="col-md-3 text-center">
+	  <h4>Type</h4>
+	</div>
   </div>
-  <div class="span3 offset1">
-    <h4><%= @entity.name %></h4>
+<% for field in @fieldlist %>
+  <div class="row">  
+	<div class="col-md-3 text-center">
+	  <h5 class="text-muted"><%= field['id'] %></h5>
+	</div>
+	<div class="col-md-3 text-center">
+	  <h5 class="text-muted"><%= field['name'] %></h5>
+	</div>
+	<div class="col-md-3 text-center">
+	  <h5 class="text-muted"><%= field['exposeAs'] %></h5>
+	</div>
+	<div class="col-md-3 text-center">
+	  <h5 class="text-muted"><%= field['fieldtype'] %></h5>
+	</div>
   </div>
-</div>
+<% end%>
 
+<legend class="topspace50">Included Linked Entities</legend>
 <div class="row">  
-  <div class="span3 offset3">
-    <h4>Expose as</h4>
+	<div class="col-md-3 text-center">
+	  <h4>Entity ID</h4>
+	</div>
+	<div class="col-md-3 text-center">
+	  <h4>Name</h4>
+	</div>
+	<div class="col-md-3 text-center">
+	  <h4>Exposed as</h4>
+	</div>
   </div>
-  <div class="span3 offset1">
-    <h4><%= @entity.exposeAs %></h4>
+<% for link in @linklist %>
+  <div class="row">  
+	<div class="col-md-3 text-center">
+	  <h5 class="text-muted"><%= link['id'] %></h5>
+	</div>
+	<div class="col-md-3 text-center">
+	  <h5 class="text-muted"><%= link['name'] %></h5>
+	</div>
+	<div class="col-md-3 text-center">
+	  <h5 class="text-muted"><%= link['exposeAs'] %></h5>
+	</div>
   </div>
-</div>
-
-<div class="row">   
-  <div class="span3 offset3">
-    <h4>Free Text?</h4>
-  </div>
-  <div class="span3 offset1">
-    <h4><%= @entity.freetext %></h4>
-  </div>
-</div>
+<% end%>

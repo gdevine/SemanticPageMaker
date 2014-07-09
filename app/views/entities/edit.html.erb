@@ -1,22 +1,129 @@
 <% provide(:title, "Edit Entity") %>
 <% provide(:pageheading, 'Edit Entity '+ @entity.name ) %>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@entity) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :name, 'Entity Name' %>
-      <%= f.text_field :name %>
-      
-      <%= f.label :exposeAs, "Expose as" %>
-      <%= f.text_field :exposeAs %>
-      
-      <%= f.label :freetext %>
-      <%= f.check_box :freetext %>
+<%= form_for @entity, :html => {:class => "form-horizontal"} do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <fieldset>
+    
+    <div class="form-group">
+      <%= f.label :name, class:"col-lg-2 control-label" %>
+      <div class="col-lg-8">
+        <%= f.text_field :name, :class => "form-control" %>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :exposeAs, :class => "col-lg-2 control-label" %>
+      <div class="col-lg-8">
+        <%= f.text_field :exposeAs, :class => "form-control" %>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :freetext, "Allow free text?", :class => "col-lg-2 control-label" %>
+      <div class="col-lg-1 checkbox">
+        <%= f.check_box :freetext, :class => "form-control" %>
+      </div>
+    </div>
 
-      <%= f.submit "Update Entity", class: "btn btn-large btn-primary" %>
-    <% end %>
+  </fieldset>
+  
+  <legend class="topspace50">Fields</legend>
+  <div id="nest-1">
+      <div class="items">
+	      <%= f.nested_fields_for :entity_fields, :id=>"duplicatable_nested_form" do |ef| %>
+	        <fieldset class="item">
+		        <div class="form-group topspace20">
+			      <%= ef.label :field_id, 'Field', class:"col-lg-2 control-label" %>
+			      <div class="col-lg-8">
+			        <%= ef.collection_select(:field_id, Field.all, :id, :name, {:include_blank=>true}, {:class=>"form-control", :id=>"select"}) %>
+			      </div>
+			    </div>
+			    
+			    <div class="form-group">
+			      <%= ef.label :multiple, "Allow multiple?", :class => "col-lg-2 control-label" %>
+			      <div class="col-lg-1 checkbox">
+			        <%= ef.check_box :multiple %>
+			      </div>
+			    </div>
+			    
+			    <div class="form-group">
+			      <%= ef.label :exposeAs, :class => "col-lg-2 control-label" %>
+			      <div class="col-lg-8">
+			        <%= ef.text_field :exposeAs, :class => "form-control" %>
+			      </div>
+			    </div>
 
+		        <%= f.hidden_field :id %>
+		        <%= ef.hidden_field :_destroy %>
+		        
+		        <div class="row">
+		          <div class="col-lg-push-9 col-lg-3">
+		            <a href="#" class="remove">Remove</a>
+		          </div>
+		        </div>
+		        
+		    </fieldset>
+	      <% end %>
+	  </div>
+	  <div class="row">
+        <div class="col-lg-push-1 col-lg-3 topspace20">
+          <a href="#" class="add">Add new field</a>
+        </div>
+      </div>
   </div>
-</div>
+  
+  <legend class="topspace50">Linked Entities</legend>
+  <div id="nest-100">
+      <div class="items">
+	      <%= f.nested_fields_for :links, :id=>"duplicatable_nested_form" do |link| %>
+	        <fieldset class="item">	
+		        <div class="form-group topspace20">
+			      <%= link.label :link_id, 'Link', class:"col-lg-2 control-label" %>
+			      <div class="col-lg-8">
+			        <%= link.collection_select(:link_id, Entity.all, :id, :name, {:include_blank=>true}, {:class=>"form-control", :id=>"select"}) %>
+			      </div>
+			    </div>
+			    
+			    <div class="form-group">
+			      <%= link.label :multiple, "Allow multiple?", :class => "col-lg-2 control-label" %>
+			      <div class="col-lg-1 checkbox">
+			        <%= link.check_box :multiple %>
+			      </div>
+			    </div>
+			    
+			    <div class="form-group">
+			      <%= link.label :exposeAs, 'Expose As', class:"col-lg-2 control-label" %>
+			      <div class="col-lg-8">
+			        <%= link.text_field :exposeAs, {class:"form-control"} %>
+			      </div>
+			    </div>
+
+		        <%= f.hidden_field :id %>
+		        <%= link.hidden_field :_destroy %>
+		        <div class="row">
+		          <div class="col-lg-push-9 col-lg-3">
+		            <a href="#" class="remove">Remove</a>
+		          </div>
+		        </div>
+		      
+		    </fieldset>
+	      <% end %>
+	  </div>
+	  
+	  <div class="row">
+	  	<div class="col-lg-push-1 col-lg-3 topspace20">
+	  	  <a href="#" class="add">Add new Link</a>
+	  	</div>
+      </div>
+  
+  </div>
+      
+  <div class="form-group">
+    <div class="col-lg-4 col-lg-offset-4 topspace50 bottomspace">
+      <%= f.submit "Update Entity", :class => "btn btn-large" %>
+    </div>
+  </div>
+
+<% end %>

@@ -53,7 +53,7 @@ class EntitiesController < ApplicationController
     end
   end
   
-   def edit
+  def edit
     @entity = Entity.find(params[:id])
     @entities = Entity.all
   end

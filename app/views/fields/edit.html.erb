@@ -1,22 +1,37 @@
 <% provide(:title, "Edit Field") %>
 <% provide(:pageheading, 'Edit Field '+ @field.name ) %>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@field) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :name, 'Field Name' %>
-      <%= f.text_field :name %>
-      
-      <%= f.label :fieldtype %>
-      <%= f.text_field :fieldtype %>
+<%= form_for @field, :html => {:class => "form-horizontal"} do |f| %>
+  <fieldset>
+    
+    <div class="form-group">
+      <%= f.label :name, class:"col-lg-2 control-label" %>
+      <div class="col-lg-8">
+        <%= f.text_field :name, class:"form-control" %>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :fieldtype, :class => "col-lg-2 control-label" %>
+      <div class="col-lg-8">
+        <%= f.text_field :fieldtype, class:"form-control" %>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :property, :class => "col-lg-2 control-label" %>
+      <div class="col-lg-8">
+        <%= f.text_field :property, class:"form-control" %>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="col-lg-4 col-lg-offset-4 bottomspace">
+        <%= f.submit "Submit", class: "btn btn-large" %>
+      </div>
+    </div>
 
-      <%= f.label :property, 'Property String' %>
-      <%= f.text_field :property %>
-      
-      <%= f.submit "Update Field", class: "btn btn-large btn-primary" %>
-    <% end %>
+  </fieldset>
 
-  </div>
-</div>
+<% end %>

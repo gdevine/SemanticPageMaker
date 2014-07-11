@@ -9,9 +9,12 @@ class EntriesController < ApplicationController
   
   def new
     @entry = Entry.new
-    @entity = Entity.find(params[:entity_id])
+    # send the related entity into the view also
+    @entity = Entity.find(params[:entity_id]) 
     @entry.field_instances.build
     @entry.entity_instances.build
+    #populate the 'link' dropdown choices
+    @ddlinks = Entry.where(entity_id: @entity.id)
     @entities = Entity.all
   end
   
@@ -22,6 +25,22 @@ class EntriesController < ApplicationController
       redirect_to @entry
     else
       render 'new'
+    end
+  end
+  
+  def edit
+    @entry = Entry.find(params[:id])
+    @entity = Entity.find(params[:entity_id])
+    @entities = Entity.all
+  end
+  
+  def update
+    @entry = Entry.find(params[:id])
+    if @entry.update_attributes(entry_params)
+      flash[:success] = "Entry updated"
+      redirect_to @entry
+    else
+      render 'edit'
     end
   end
   
@@ -54,6 +73,10 @@ class EntriesController < ApplicationController
     @entities = Entity.all
   end
   
+  def destroy
+    @entry.destroy
+    redirect_to entries_path
+  end
   
   private
   
@@ -61,8 +84,8 @@ class EntriesController < ApplicationController
       params.require(:entry).permit(:entity_id, 
                                     :entry_id, 
                                     :field_id, 
-                                    field_instances_attributes: [:entry_id, :field_id, :exposeAs, :answer],
-                                    entity_instances_attributes: [:entry_id, :link_id, :exposeAs])
+                                    field_instances_attributes: [:id, :entry_id, :field_id, :exposeAs, :answer, :_destroy],
+                                    entity_instances_attributes: [:id, :entry_id, :link_id, :exposeAs, :_destroy])
     end
     
     def correct_user

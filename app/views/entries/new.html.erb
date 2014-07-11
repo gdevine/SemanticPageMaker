@@ -1,64 +1,86 @@
 <% provide(:title, 'New Entry') %>
-<h1>New <%= @entity.name %> </h1>
-<div class="row">
-  <div class="span6 offset3">
-    
-    
-    <%= form_for(@entry) do |f| %>
-      <%= f.hidden_field :entity_id, :value => @entity.id %>     
-      
-      <h2>Fields</h2>
-      
-      <% for ef in @entity.entity_fields.to_a %>
-        <div id="nest-<%= ef.id.to_s %>">
-	        <div class="items well">
-		      <%= f.nested_fields_for :field_instances, :id=>"duplicatable_nested_form" do |fi| %>
-		        <fieldset class="item">
-			        
-			        <%= fi.label :answer, ef.exposeAs %>
-			        <%= fi.text_field :answer %>
-			        
-	                <%= fi.hidden_field :field_id, :value => ef.field_id %>  
-	                <%= fi.hidden_field :exposeAs, :value => ef.exposeAs %> 
-			        
-			        <a href="#" class="remove">remove</a>
-	
-			        <%= f.hidden_field :id %>
-			        <%= f.hidden_field :_destroy %>
-			    </fieldset>
-		      <% end %>
-		    </div>  
-	        <a href="#" class="add">add new field</a>
+<% provide(:pageheading, 'New '+ @entity.name.to_s) %>
+
+<%= form_for @entry, :html => {:class => 'form-horizontal'} do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.hidden_field :entity_id, :value => @entity.id %>     
+
+  <legend class="topspace50">Fields</legend>
+  <% for ef in @entity.entity_fields.to_a %>
+    <div id="nest-<%= ef.id.to_s %>">
+        <div class="items">
+	      <%= f.nested_fields_for :field_instances, :id=>"duplicatable_nested_form" do |fi| %>
+	        <fieldset class="item">
+              <div class="form-group topspace50">
+		        <%= fi.label :answer, ef.exposeAs, class:"col-lg-2 control-label" %>
+			    <div class="col-lg-8">
+		          <%= fi.text_field :answer, :class => "form-control" %>
+		        </div>
+		      </div>
+
+              <%= fi.hidden_field :field_id, :value => ef.field_id %>  
+              <%= fi.hidden_field :exposeAs, :value => ef.exposeAs %> 
+              
+              <div class="row">
+		        <div class="col-lg-push-9 col-lg-3">
+		          <a href="#" class="btn btn-default btn-xs remove">remove</a>
+                </div>
+              </div>
+              
+		      <%= fi.hidden_field :id %>
+		      <%= fi.hidden_field :_destroy %>
+		    </fieldset>
+	      <% end %>
+	    </div>  
+        <div class="row">
+	      <div class="col-lg-push-1 col-lg-3 topspace20">
+	        <a href="#" class="add">Add new <%= ef.exposeAs %> </a>
+	      </div>
 	    </div>
-      <% end %>
-      
-      <h2>Links</h2>
-      
-      <% for link in @entity.links.to_a %>
-        <div id="nest-<%= (link.id+100).to_s %>">
-	        <div class="items well">
-		      <%= f.nested_fields_for :entity_instances, :id=>"duplicatable_nested_form" do |fi| %>
-		        <fieldset class="item">
-			        
-			        <!-- put the dropdown list of entries here -->
-			        <%= fi.label :link_id, 'Linked Entry' %>
-			        <%= fi.collection_select(:link_id, Entry.all, :id, :id, include_blank:true) %>
-			        
-	                <%= fi.hidden_field :field_id, :value => link.link_id %>  
-	                <%= fi.hidden_field :exposeAs, :value => link.exposeAs %> 
-			        
-			        <a href="#" class="remove">remove</a>
-	
-			        <%= f.hidden_field :id %>
-			        <%= f.hidden_field :_destroy %>
-			    </fieldset>
-		      <% end %>
-		    </div>  
-	        <a href="#" class="add">add new field</a>
-	    </div>
-      <% end %>
-      
-      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
-    <% end %>
+    </div>
+  <% end %>
+  
+  <legend class="topspace50">Links</legend>
+  <% for link in @entity.links.to_a %>
+    <div id="nest-<%= (link.id+100).to_s %>">
+        <div class="items">
+	      <%= f.nested_fields_for :entity_instances, :id=>"duplicatable_nested_form" do |ei| %>
+	        <fieldset class="item">
+
+		        <!-- put the dropdown list of entries here -->
+              <div class="form-group topspace50">
+		        <%= ei.label :link_id, link.exposeAs, class:"col-lg-2 control-label" %>
+		        <div class="col-lg-8">
+		          <%= ei.collection_select(:link_id, @ddlinks, :id, :id, {:prompt => 'Select a '+link.exposeAs}, {:class=>"form-control", :id=>"select"}) %>
+			    </div>
+		      </div>
+
+              <%= ei.hidden_field :field_id, :value => link.link_id %>  
+              <%= ei.hidden_field :exposeAs, :value => link.exposeAs %> 
+
+		      <div class="row">
+		        <div class="col-lg-push-9 col-lg-3">
+		          <a href="#" class="btn btn-default btn-xs remove">remove</a>
+                </div>
+              </div>
+
+		      <%= ei.hidden_field :id %>
+		      <%= ei.hidden_field :_destroy %>
+		    </fieldset>
+	      <% end %>
+	    </div>  
+	    <div class="row">
+		  <div class="col-lg-push-1 col-lg-3 topspace20">
+		    <a href="#" class="add">Add new <%= link.exposeAs %></a>
+		  </div>
+		</div>
+    </div>
+  <% end %>
+  
+  <div class="form-group">
+    <div class="col-lg-4 col-lg-offset-4 topspace50 bottomspace">
+      <%= f.submit "Submit", :class => "btn btn-large" %>
+    </div>
   </div>
-</div>
+  
+<% end %>

@@ -51,7 +51,7 @@
               <div class="form-group topspace50">
 		        <%= ei.label :link_id, link.exposeAs, class:"col-lg-2 control-label" %>
 		        <div class="col-lg-8">
-		          <%= ei.collection_select(:link_id, @ddlinks, :id, :id, {:prompt => 'Select a '+link.exposeAs}, {:class=>"form-control", :id=>"select"}) %>
+		          <%= ei.collection_select(:link_id, Entry.where(entity_id: link.link_id), :id, :id, {:prompt => 'Select a '+link.exposeAs}, {:class=>"form-control", :id=>"select"}) %>
 			    </div>
 		      </div>
 

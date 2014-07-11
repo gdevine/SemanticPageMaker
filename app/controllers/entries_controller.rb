@@ -13,8 +13,6 @@ class EntriesController < ApplicationController
     @entity = Entity.find(params[:entity_id]) 
     @entry.field_instances.build
     @entry.entity_instances.build
-    #populate the 'link' dropdown choices
-    @ddlinks = Entry.where(entity_id: @entity.id)
     @entities = Entity.all
   end
   

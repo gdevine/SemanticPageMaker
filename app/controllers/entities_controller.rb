@@ -80,6 +80,7 @@ class EntitiesController < ApplicationController
       params.require(:entity).permit(:name, 
                                      :exposeAs, 
                                      :freetext, 
+                                     :typeof,
                                      entity_fields_attributes: [:id, :multiple, :entity_id, :field_id, :exposeAs, :_destroy],
                                      links_attributes: [:id, :multiple, :entity_id, :link_id, :exposeAs, :property, :_destroy])
     end

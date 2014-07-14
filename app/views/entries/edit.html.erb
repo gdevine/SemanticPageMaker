@@ -76,17 +76,19 @@
   <legend class="topspace50">Links</legend>
     <div id="nest-100">
         <div class="items">
+        	
+          <% @linksused = [] %>
+          
 	      <%= f.nested_fields_for :entity_instances, :id=>"duplicatable_nested_form" do |ei| %>
 	        <fieldset class="item">
-		        <!-- put the dropdown list of entries here -->
+		      <!-- put the dropdown list of entries here -->
               <div class="form-group topspace50">
 		        <%= ei.label :link_id, ei.object.exposeAs, class:"col-lg-2 control-label" %>
 		        <div class="col-lg-8">
-		          <%= ei.collection_select(:link_id, Entry.all, :id, :id, {:include_blank=>true}, {:class=>"form-control", :id=>"select"}) %>
+		        	<%= createdropdown(ei) %>
 			    </div>
 		      </div>
-
-              <%= ei.hidden_field :entry_id, :value => ei.object.link_id %>  
+ 
               <%= ei.hidden_field :exposeAs, :value => ei.object.exposeAs %> 
               
 		      <%= ei.hidden_field :id %>
@@ -99,14 +101,51 @@
               </div>
 
 		    </fieldset>
+		    
+            <% @linksused << ei.object.id %>
+            
+	      <% end %>
+	    </div>  
+    </div>
+    
+  <legend class="topspace50">Add Links</legend>
+  <% for link in @entity.links.to_a %>
+    <div id="nest-<%= (link.id+100).to_s %>">
+        <div class="items">
+	      <%= f.nested_fields_for :entity_instances, :id=>"duplicatable_nested_form" do |ei| %>
+	        <% if !@linksused.include? ei.object.id || ei.object.id.nil? %>
+		        <fieldset class="item">
+	
+			        <!-- put the dropdown list of entries here -->
+	              <div class="form-group topspace50">
+			        <%= ei.label :link_id, link.exposeAs, class:"col-lg-2 control-label" %>
+			        <div class="col-lg-8">
+			          <%= ei.collection_select(:link_id, Entry.where(entity_id: link.link_id), :id, :id, {:prompt => 'Select a '+link.exposeAs}, {:class=>"form-control", :id=>"select"}) %>
+				    </div>
+			      </div>
+	
+	              <%# ei.hidden_field :field_id, :value => link.link_id %>  
+	              <%= ei.hidden_field :exposeAs, :value => link.exposeAs %> 
+	
+			      <div class="row">
+			        <div class="col-lg-push-9 col-lg-3">
+			          <a href="#" class="btn btn-default btn-xs remove">remove</a>
+	                </div>
+	              </div>
+	
+			      <%= ei.hidden_field :id %>
+			      <%= ei.hidden_field :_destroy %>
+			    </fieldset>
+			  <% end %>    
 	      <% end %>
 	    </div>  
 	    <div class="row">
 		  <div class="col-lg-push-1 col-lg-3 topspace20">
-		    <a href="#" class="add">Add new</a>
+		    <a href="#" class="add">Add new <%= link.exposeAs %></a>
 		  </div>
 		</div>
     </div>
+  <% end %>
   
   <div class="form-group">
     <div class="col-lg-4 col-lg-offset-4 topspace50 bottomspace">

@@ -22,6 +22,11 @@ class EntriesController < ApplicationController
       flash[:success] = "Entry created!"
       redirect_to @entry
     else
+      # Still need to include the entity type for rendering back to a new entry
+      @entity = Entity.find(@entry.entity_id)
+      # All entities needed for the menu bar (temporary placement)
+      @entities = Entity.all
+      
       render 'new'
     end
   end
@@ -38,6 +43,11 @@ class EntriesController < ApplicationController
       flash[:success] = "Entry updated"
       redirect_to @entry
     else
+      # Still need to include the entity type for rendering back to a new entry
+      @entity = Entity.find(@entry.entity_id)
+      # All entities needed for the menu bar (temporary placement)
+      @entities = Entity.all
+      
       render 'edit'
     end
   end
@@ -61,7 +71,7 @@ class EntriesController < ApplicationController
       for ent in @entry.entity_instances
         myhash = Hash.new
         myhash['label'] = ent.exposeAs
-        # myhash['predicate'] = (Field.find(efield.field_id)).property
+        myhash['typeof'] = Entry.find(ent.link_id).entity.typeof
         myhash['answer'] = ent
         @entitylist << myhash 
       end

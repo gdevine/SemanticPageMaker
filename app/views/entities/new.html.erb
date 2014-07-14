@@ -20,6 +20,13 @@
     </div>
     
     <div class="form-group">
+      <%= f.label :typeof, :class => "col-lg-2 control-label" %>
+      <div class="col-lg-8">
+        <%= f.text_field :typeof, :class => "form-control" %>
+      </div>
+    </div>
+    
+    <div class="form-group">
       <%= f.label :freetext, "Allow free text?", :class => "col-lg-2 control-label" %>
       <div class="col-lg-1 checkbox">
         <%= f.check_box :freetext, :class => "form-control" %>

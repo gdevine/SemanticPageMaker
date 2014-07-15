@@ -11,6 +11,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'sprockets', '2.11.0'
 gem 'comfortable_mexican_sofa', '~> 1.12.0'
 gem 'awesome_nested_fields'
+gem 'jquery-turbolinks'
 
 
 group :development, :test do

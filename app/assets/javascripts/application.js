@@ -10,11 +10,11 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require bootstrap
 //= require jquery
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require jquery.nested-fields
+//= require bootstrap
 //= require_tree .
 
 $(document).ready(function(e) {

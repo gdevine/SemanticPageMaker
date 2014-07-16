@@ -208,7 +208,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-    tinymce-rails (4.1.0)
+    tinymce-rails (4.1.2)
       railties (>= 3.1.1)
     treetop (1.4.15)
       polyglot

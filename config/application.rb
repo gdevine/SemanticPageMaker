@@ -28,6 +28,6 @@ module SampleTracker
     I18n.enforce_available_locales = true
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.assets.initialize_on_precompile = false
-    config.serve_static_assets = true
+    config.serve_static_assets = false
   end
 end

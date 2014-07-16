@@ -11,9 +11,9 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap
 //= require jquery_ujs
 //= require jquery.ui.all
+//= require bootstrap
 //= require turbolinks
 //= require jquery.nested-fields
 //= require_tree .

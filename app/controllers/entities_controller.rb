@@ -33,6 +33,7 @@ class EntitiesController < ApplicationController
       for link in @entity.links
         myhash = Hash.new
         myhash['id'] = (Entity.find(link.link_id)).id
+        myhash['property'] = link.property
         myhash['name'] = (Entity.find(link.link_id)).name
         myhash['exposeAs'] = link.exposeAs
         @linklist << myhash 

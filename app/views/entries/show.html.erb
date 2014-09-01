@@ -71,7 +71,7 @@
 		  <h4><%= link['label'] %></h4>
 		</div>
 		<div class="col-md-2">
-		  <h4 class="text-muted"><%= link_to link['answer'].link_id, entry_url(link['answer'].link_id), 'rel'=>link['typeof'] %></h4>
+		  <h4 class="text-muted"><%= link_to link['answer'].link_id, entry_url(link['answer'].link_id), 'property'=>link['predicate'] %></h4>
 		</div>
 	  </div>
 	<% end%>

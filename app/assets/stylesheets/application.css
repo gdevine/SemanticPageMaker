@@ -11,6 +11,6 @@
  *= require_self
  *= require_tree .
  *= require bootstrap
- *= require simplex
+ *= require lumen
  *= require jquery.ui.all
  */

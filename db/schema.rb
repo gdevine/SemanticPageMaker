@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714121549) do
+ActiveRecord::Schema.define(version: 20140901082110) do
 
   create_table "comfy_cms_blocks", force: true do |t|
     t.string   "identifier",                      null: false
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(version: 20140714121549) do
     t.string   "exposeAs"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "property"
   end
 
   create_table "entries", force: true do |t|
@@ -192,6 +193,7 @@ ActiveRecord::Schema.define(version: 20140714121549) do
     t.string   "exposeAs"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "property"
   end
 
   create_table "users", force: true do |t|

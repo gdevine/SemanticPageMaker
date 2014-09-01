@@ -123,9 +123,9 @@
 			          <%= ei.collection_select(:link_id, Entry.where(entity_id: link.link_id), :id, :id, {:prompt => 'Select a '+link.exposeAs}, {:class=>"form-control", :id=>"select"}) %>
 				    </div>
 			      </div>
-	
-	              <%# ei.hidden_field :field_id, :value => link.link_id %>  
+	  
 	              <%= ei.hidden_field :exposeAs, :value => link.exposeAs %> 
+                  <%= ei.hidden_field :property, :value => link.property %> 
 	
 			      <div class="row">
 			        <div class="col-lg-push-9 col-lg-3">

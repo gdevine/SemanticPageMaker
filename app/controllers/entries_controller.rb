@@ -71,7 +71,8 @@ class EntriesController < ApplicationController
       for ent in @entry.entity_instances
         myhash = Hash.new
         myhash['label'] = ent.exposeAs
-        myhash['typeof'] = Entry.find(ent.link_id).entity.typeof
+        # myhash['property'] = ent.property
+        myhash['predicate'] = ent.property
         myhash['answer'] = ent
         @entitylist << myhash 
       end
@@ -93,7 +94,7 @@ class EntriesController < ApplicationController
                                     :entry_id, 
                                     :field_id, 
                                     field_instances_attributes: [:id, :entry_id, :field_id, :exposeAs, :answer, :_destroy],
-                                    entity_instances_attributes: [:id, :entry_id, :link_id, :exposeAs, :_destroy])
+                                    entity_instances_attributes: [:id, :entry_id, :link_id, :exposeAs, :property, :_destroy])
     end
     
     def correct_user

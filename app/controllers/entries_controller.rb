@@ -93,6 +93,7 @@ class EntriesController < ApplicationController
       params.require(:entry).permit(:entity_id, 
                                     :entry_id, 
                                     :field_id, 
+                                    :textblock,
                                     field_instances_attributes: [:id, :entry_id, :field_id, :exposeAs, :answer, :_destroy],
                                     entity_instances_attributes: [:id, :entry_id, :link_id, :exposeAs, :property, :_destroy])
     end

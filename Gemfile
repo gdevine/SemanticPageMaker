@@ -11,7 +11,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'sprockets', '2.11.0'
 gem 'comfortable_mexican_sofa', '~> 1.12.0'
 gem 'awesome_nested_fields'
-
+gem 'redcarpet'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

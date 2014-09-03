@@ -5,6 +5,13 @@
   <%= render 'shared/error_messages', object: f.object %>
   <%= f.hidden_field :entity_id, :value => @entity.id %>     
 
+  <div class="form-group">
+	<%= f.label :textblock, class:"col-lg-2 control-label" %>
+	<div class="col-lg-8">
+	  <%= f.text_area :textblock, :class => "form-control" %>
+	</div>
+  </div>
+
   <legend class="topspace50">Fields</legend>
     <div id="nest-1">
         <div class="items">

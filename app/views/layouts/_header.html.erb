@@ -8,7 +8,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "PageMaker", root_path, class: "navbar-brand"  %>
+      <% if signed_in? %>
+        <%= link_to "PageMaker", root_path, class: "navbar-brand"  %>
+      <% else %>
+        <%= link_to "HIE Metadata Pages", root_path, class: "navbar-brand"  %>
+      <% end %>
     </div>
     
     <!-- Collect the nav links, forms, and other content for toggling -->

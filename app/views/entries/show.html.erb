@@ -1,5 +1,5 @@
 <% provide(:title, 'Entry View') %>
-<% provide(:pageheading, @entity.name+' Entry') %>
+<% provide(:pageheading, @entry.slug) %>
 
 <!-- Add edit/delete buttons if current user -->
 <% if current_user?(@entry.creator) %> 
@@ -17,72 +17,79 @@
   </div>
 <% end %>
 
-<div typeof=<%= @entity.typeof %>>
-	<div class="topspace50">
-		<div class="row">  
-		  <div class="col-md-offset-4 col-md-2">
-		    <h4 class="text-left">Entry ID</h4>
-		  </div>
-		  <div class="col-md-2">
-		    <h4 class="text-muted"><%= @entry.id %></h4>
-		  </div>
-		</div>
-		
-		<div class="row">  
-		  <div class="col-md-offset-4 col-md-2">
-		    <h4 class="text-left">Entry Type</h4>
-		  </div>
-		  <div class="col-md-2">
-		    <h4 class="text-muted"><%= @entity.name %></h4>
-		  </div>
-		</div>
-		
-		<div class="row">  
-		  <div class="col-md-offset-4 col-md-2">
-		    <h4 class="text-left">Date Created</h4>
-		  </div>
-		  <div class="col-md-2">
-		    <h4 class="text-muted"><span property="http://purl.org/dc/terms/created"><%= @entry.created_at %></span></h4>
-		  </div>
-		</div>
-		
-	</div>
-	
-	
-	<legend class="topspace50">Fields</legend>
-	
-	<% for field in @fieldlist %>
-	  <div class="row">  
-		<div class="col-md-offset-4 col-md-2">
-		  <h4><%= field['label'] %></h4>
-		</div>
-		<div class="col-md-2">
-		  <h4 class="text-muted" property="<%= field['predicate'] %>"><%= field['answer'] %></h4>
-		</div>
-	  </div>
-	<% end%>
-	
-	
-	<legend class="topspace50">Links</legend>
-	
-	<% for link in @entitylist %>
-	  <div class="row">  
-		<div class="col-md-offset-4 col-md-2">
-		  <h4><%= link['label'] %></h4>
-		</div>
-		<div class="col-md-2">
-		  <h4 class="text-muted"><%= link_to link['answer'].link_id, entry_url(link['answer'].link_id), 'property'=>link['predicate'] %></h4>
-		</div>
-	  </div>
-	<% end%>
 
-
-	<legend class="topspace50">Text</legend>	
 	
-	<div class="row">  
-	  <div class="col-md-12">
-	    <h4 class="text-muted"><%= markdown(@entry.textblock.to_s) %></h4>
-	  </div>
+	<div class="row topspace50">
+		
+		<div class="col-md-9">
+		  <legend>Text</legend>	
+		
+		  <div class="row">  
+		    <div class="col-md-12">
+		      <h5 class="text-muted"><%= markdown(@entry.textblock.to_s) %></h5>
+		    </div>
+		  </div>
+		  
+			
+	      <% for field in @fieldlist %>
+			  <div class="row">  
+				<div class="col-md-12 topspace50">
+				  <legend><%= field['label'] %></legend>
+				</div>
+				<div class="col-md-12">
+				  <h5 class="text-muted" property="<%= field['predicate'] %>"><%= field['answer'] %></h5>
+				</div>
+			  </div>
+		  <% end%>
+		
+		  <% for link in @entitylist %>
+			  <div class="row">  
+				<div class="col-md-12 topspace50">
+				  <legend><%= link['label'] %></legend>
+				</div>
+				<div class="col-md-12">
+				  <h5 class="text-muted"><%= link_to link['answer'].link_id, entry_url(link['answer'].link_id), 'property'=>link['predicate'] %></h5>
+				</div>
+			  </div>
+		  <% end%>
+			
+	    </div>
+		
+		<div class="well col-md-3">
+			<div class="row">  
+			  <div class="col-md-12">
+			    <h4>Entry ID</h4>
+			  </div>
+			</div>
+			<div class="row">
+			  <div class="col-md-12">
+			    <h5 class="text-muted"><%= @entry.id %></h5>
+			  </div>
+			</div>
+			
+			<div class="row">  
+			  <div class="col-md-12">
+			    <h4 class="text-left">Entry Type</h4>
+			  </div>
+			</div>
+			<div class="row">
+			  <div class="col-md-12">
+			    <h5 class="text-muted"><%= @entity.name %></h5>
+			  </div>
+			</div>
+			
+			<div class="row">  
+			  <div class="col-md-12">
+			    <h4>Date Created</h4>
+			  </div>
+			</div>
+			<div class="row">
+			  <div class="col-md-12">
+			    <h5 class="text-muted"><span property="http://purl.org/dc/terms/created"><%= @entry.created_at.to_date %></span></h5>
+			  </div>
+			</div>
+			
+		</div>
+				
 	</div>
-</div>
 

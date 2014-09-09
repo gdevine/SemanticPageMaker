@@ -3,16 +3,15 @@
 
 <%= form_for @entry, :html => {:class => 'form-horizontal'} do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <%= f.hidden_field :entity_id, :value => @entity.id %>     
-
+  <%= f.hidden_field :entity_id, :value => @entity.id %>   
+  
   <div class="form-group">
-	<%= f.label :textblock, class:"col-lg-2 control-label" %>
+	<%= f.label :slug, 'Short Name', class:"col-lg-2 control-label" %>
 	<div class="col-lg-8">
-	  <%= f.text_area :textblock, :class => "form-control" %>
+	  <%= f.text_field :slug, :class => "form-control" %>
 	</div>
-  </div>
+  </div>  
 
-  <legend class="topspace50">Fields</legend>
     <div id="nest-1">
         <div class="items">
           <% @fieldsused = [] %>
@@ -43,7 +42,7 @@
 	    </div>  
     </div>
     
-  <legend class="topspace50">Add Fields</legend>
+  <h4 class="topspace50">Add Fields</h4>
   <% for ef in @entity.entity_fields.to_a %>
     <div id="nest-<%= ef.id.to_s %>">
         <div class="items">
@@ -80,7 +79,6 @@
     </div>
   <% end %>
   
-  <legend class="topspace50">Links</legend>
     <div id="nest-100">
         <div class="items">
         	
@@ -115,7 +113,7 @@
 	    </div>  
     </div>
     
-  <legend class="topspace50">Add Links</legend>
+  <h4 class="topspace50">Add Links</h4>
   <% for link in @entity.links.to_a %>
     <div id="nest-<%= (link.id+100).to_s %>">
         <div class="items">
@@ -153,6 +151,14 @@
 		</div>
     </div>
   <% end %>
+  
+  
+  <div class="form-group">
+	<%= f.label :textblock, 'Free Text', class:"col-lg-2 control-label" %>
+	<div class="col-lg-8">
+	  <%= f.text_area :textblock, :class => "form-control", :style => "height: 250px;" %>
+	</div>
+  </div>
   
   <div class="form-group">
     <div class="col-lg-4 col-lg-offset-4 topspace50 bottomspace">

@@ -1,17 +1,25 @@
-<% if @entries.any? %>
-  <%= will_paginate @entries %>
-  <table class="table table-bordered table-striped table-hover" width="647">
-    <thead>
-      <tr>
-        <th>Entry ID</th>
-        <th>Entry Type</th>
-        <th>View?</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render partial: 'entries/entries_table', collection: @entries, as: :entry %>
-    </tbody>
-  </table>
+<% if @sorted_entries.any? %>
+  <% @sorted_entries.each do |entry_collection| %>
+    
+    <!-- Put in the table heading for this entity type  -->
+  	<div class="row topspace50">
+		<div class="col-md-12">
+		  <h4><%= entry_collection["entity_type"] %></h4>	
+		</div>
+	</div>
+	
+	<!-- List each entry matching the entity type into a table  -->
+	<div class="row topspace20">
+		<div class="col-md-12">
+		  <ul>
+		    <% entry_collection["entries"].each do |entry| %>
+			  <li><%= link_to entry["slug"].to_s, entry["url"] %></li>
+	        <% end %>
+		  </ul>	
+		</div>
+	</div>
+  
+  <% end %>
   
 <% else %>
   <p>No Entries found</p>

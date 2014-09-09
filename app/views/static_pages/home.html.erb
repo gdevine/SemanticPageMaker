@@ -1,30 +1,33 @@
-<div class="center hero-unit">
-  <h1>HIE Data Management</h1>
-  <h2>
+<% provide(:title, 'HIE Data Management') %>
+
+
+<h1>HIE Data Management</h1>
+<h4 class="center topspace20">
     Welcome to the Data Pages for the Hawkesbury Institute for the Environment at the University of Western Sydney. 
-  </h2>
+</h4>
+
+<div class="row topspace50">
+	<div class="col-md-8 col-md-offset-2">
+	  	<div class="row">
+	      <div class="col-md-4 col-md-offset-1">
+	        Find out about Data at HIE and how you, as a HIE researcher, can manage your data in a efficient and responsible manner
+	      </div>
+	      <div class="col-md-4 col-md-offset-1"> 
+	        <%= link_to "Data Management at HIE", 'data-management', class: "btn btn-primary btn-block" %>
+	      </div>  
+	    </div>
+	</div>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-body">
-  	<div class="row">
-      <div class="span9">
-        Find out about Data at HIE and how you, as a HIE researcher, can manage your data in a efficient and responsible manner
-      </div>
-      <div class="span3"> 
-        <%= link_to "Data Management at HIE", 'data-management', class: "btn btn-primary" %>
-      </div>  
-  </div>
-</div>
-
-<div class="panel panel-default">
-  <div class="panel-body">
-  	<div class="row">
-      <div class="span9">
-        Get an overview of current data status at HIE
-      </div>
-      <div class="span3"> 
-        <%= link_to "Data Dashboard", 'data-dashboard', class: "btn btn-primary" %>
-      </div>  
-  </div>
+<div class="row topspace50">
+	<div class="col-md-8 col-md-offset-2">
+	  	<div class="row">
+	      <div class="col-md-4 col-md-offset-1">
+	        Get an overview of current data status at HIE
+	      </div>
+	      <div class="col-md-4 col-md-offset-1"> 
+	        <%= link_to "Data Dashboard", 'data-dashboard', class: "btn btn-primary btn-block" %>
+	      </div>
+	    </div>  
+	</div>
 </div>

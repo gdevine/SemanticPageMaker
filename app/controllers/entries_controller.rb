@@ -106,7 +106,7 @@ class EntriesController < ApplicationController
         myhash['label'] = ent.exposeAs
         # myhash['property'] = ent.property
         myhash['predicate'] = ent.property
-        myhash['answer'] = ent
+        myhash['answer'] = ent.link_id
         @entitylist << myhash 
       end
     end

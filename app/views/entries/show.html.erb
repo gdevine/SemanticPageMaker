@@ -17,8 +17,6 @@
   </div>
 <% end %>
 
-
-	
 	<div class="row topspace50">
 		
 		<div class="col-md-9">
@@ -48,7 +46,7 @@
 				  <legend><%= link['label'] %></legend>
 				</div>
 				<div class="col-md-12">
-				  <h5 class="text-muted"><%= link_to link['answer'].link_id, entry_url(link['answer'].link_id), 'property'=>link['predicate'] %></h5>
+				  <h5 class="text-muted"><%= link_to Entry.find(link['answer']).slug.to_s, entry_url(link['answer']), 'property'=>link['predicate'] %></h5>
 				</div>
 			  </div>
 		  <% end%>

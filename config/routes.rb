@@ -1,9 +1,5 @@
 SampleTracker::Application.routes.draw do
   
-  get "entries/new"
-  get "fields/new"
-  get "entities/new"
-  
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :entities
@@ -11,7 +7,8 @@ SampleTracker::Application.routes.draw do
   resources :entries
   
   root  'static_pages#home'
-  match '/register',    to: 'users#new',    via: 'get'
+  match '/register',    to: 'users#new',            via: 'get'
+  match '/dashboard',   to: 'static_pages#dashboard',    via: 'get'
   match '/help',        to: 'static_pages#help',    via: 'get'
   match '/about',       to: 'static_pages#about',   via: 'get'
   match '/contact',     to: 'static_pages#contact', via: 'get'

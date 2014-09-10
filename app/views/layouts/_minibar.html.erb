@@ -1,11 +1,6 @@
-<% if signed_in? %> 
-	<nav class="navbar navbar-default" role="navigation" id="minibar">
-	  <div class="container">
-	    <div class="navbar-collapse" id="bs-example-navbar-collapse-2">
-		    <ul class="nav navbar-nav">
-		      <%= render 'layouts/minibar_links' %>
-		    </ul>
-		</div>
-	  </div>
-	</nav>
-<% end %>
+
+<nav class="navbar navbar-default" id="minibar">
+  <div class="container-fluid">
+    <%= render 'layouts/minibar_links' %>
+  </div>
+</nav>

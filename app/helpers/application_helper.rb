@@ -18,16 +18,6 @@ module ApplicationHelper
     end
   end
   
-  def show_minibar?(current_path)
-    if [root_path, about_path, contact_path, help_path, users_path, register_path, sessions_path, signin_path].include? current_path  
-      return false
-    elsif current_path.include? "/data-management"
-      return false
-    else
-      return true
-    end     
-  end
-  
   def markdown(text)
     options = {
       filter_html:     false,

@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_action :signed_in_user, only: [:dashboard]
+  
   def home
   end
 
@@ -10,4 +12,9 @@ class StaticPagesController < ApplicationController
   
   def contact
   end
+  
+  def dashboard
+    @entities = Entity.all
+  end
+  
 end

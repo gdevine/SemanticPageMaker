@@ -1,26 +1,48 @@
 <% provide(:title, 'Register') %>
-<h1>Register</h1>
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
+<% provide(:pageheading, 'Register New Account') %>
 
-      <%= f.label :firstname %>
-      <%= f.text_field :firstname %>
-      
-      <%= f.label :surname %>
-      <%= f.text_field :surname %>
-
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
-
-      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
-    <% end %>
+<%= form_for @user, :html => {:class => 'form-horizontal'} do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+	
+  <div class="form-group">
+	<%= f.label :firstname, 'First Name', class:"col-lg-2 control-label" %>
+	<div class="col-lg-8">
+	  <%= f.text_field :firstname, :class => "form-control" %>
+	</div>
   </div>
-</div>
+  
+  <div class="form-group">
+	<%= f.label :surname, 'Surname', class:"col-lg-2 control-label" %>
+	<div class="col-lg-8">
+	  <%= f.text_field :surname, :class => "form-control" %>
+	</div>
+  </div>
+  
+  <div class="form-group">
+	<%= f.label :email, 'Email', class:"col-lg-2 control-label" %>
+	<div class="col-lg-8">
+	  <%= f.email_field :email, :class => "form-control" %>
+	</div>
+  </div>
+  
+  <div class="form-group">
+	<%= f.label :password, 'Password', class:"col-lg-2 control-label" %>
+	<div class="col-lg-8">
+	  <%= f.password_field :password, :class => "form-control" %>
+	</div>
+  </div>
+  
+  <div class="form-group">
+	<%= f.label :password_confirmation, 'Confirm', class:"col-lg-2 control-label" %>
+	<div class="col-lg-8">
+	  <%= f.password_field :password_confirmation, :class => "form-control" %>
+	</div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-lg-4 col-lg-offset-4 topspace50 bottomspace">
+      <%= f.submit "Create Account", :class => "btn btn-large" %>
+    </div>
+  </div>
+
+<% end %>

@@ -88,14 +88,37 @@ class EntriesController < ApplicationController
   def show
     @entry = Entry.find(params[:id])
     
-    @fieldlist = []
+    # create a master array to contain all grouped fields
+    @grouped_fields = []    
+    # create array to track already found field types
+    fields_found = []
+    
+    # @fieldlist = []
     if !@entry.field_instances.empty?
       for efield in @entry.field_instances
-        myhash = Hash.new
-        myhash['label'] = efield.exposeAs
-        myhash['predicate'] = (Field.find(efield.field_id)).property
-        myhash['answer'] = efield.answer
-        @fieldlist << myhash 
+        
+        if !fields_found.include?(efield.exposeAs)
+          # field type has not been found as of yet so create a new hash
+          field_list = {"label" => efield.exposeAs, "predicate" => (Field.find(efield.field_id)).property, "answers" => []}
+          # add current answer to this grouping
+          field_list["answers"] << efield.answer
+          # add me as a new member of the grouped_fields master array
+          @grouped_fields << field_list
+          # add field type to those found already (so that future instance are added to this one)
+          fields_found << efield.exposeAs
+                
+          # myhash = Hash.new
+          # myhash['label'] = efield.exposeAs
+          # myhash['predicate'] = (Field.find(efield.field_id)).property
+          # myhash['answer'] = efield.answer
+          # @fieldlist << myhash 
+        else
+          # retrieve the matching existing field_list
+          field_list = @grouped_fields.find {|grouping| grouping["label"] == efield.exposeAs }
+          # add entry mini hash to entity_collection
+          field_list["answers"] << efield.answer          
+        end
+        
       end
     end
       

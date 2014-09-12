@@ -17,39 +17,44 @@
   </div>
 <% end %>
 
-	<div class="row topspace50">
+	<div class="row topspace20">
 		
 		<div class="col-md-9">
-		  <legend>Text</legend>	
-		
-		  <div class="row">  
-		    <div class="col-md-12">
-		      <h5 class="text-muted"><%= markdown(@entry.textblock.to_s) %></h5>
-		    </div>
-		  </div>
-		  
 			
-	      <% for field in @fieldlist %>
-			  <div class="row">  
-				<div class="col-md-12 topspace50">
-				  <legend><%= field['label'] %></legend>
+	      <% if @grouped_fields.any? %>
+            <% @grouped_fields.each do |field_group| %>
+              <div class="row">  
+				<div class="col-md-12 topspace20">
+				  <legend><%= field_group['label'] %>(s)</legend>
 				</div>
-				<div class="col-md-12">
-				  <h5 class="text-muted" property="<%= field['predicate'] %>"><%= field['answer'] %></h5>
-				</div>
+				<% field_group["answers"].each do |field| %>
+					<div class="col-md-12">
+					  <h5 class="text-muted" property="<%= field_group['predicate'] %>"><%= field %></h5>
+					</div>
+			    <% end %>
 			  </div>
-		  <% end%>
+			<% end %>
+	      <% end %>
 		
 		  <% for link in @entitylist %>
 			  <div class="row">  
-				<div class="col-md-12 topspace50">
-				  <legend><%= link['label'] %></legend>
+				<div class="col-md-12 topspace20">
+				  <legend><%= link['label'] %>(s)</legend>
 				</div>
 				<div class="col-md-12">
 				  <h5 class="text-muted"><%= link_to Entry.find(link['answer']).slug.to_s, entry_url(link['answer']), 'property'=>link['predicate'] %></h5>
 				</div>
 			  </div>
 		  <% end%>
+		  
+		  
+		  <legend class="topspace50">Text</legend>	
+		
+		  <div class="row">  
+		    <div class="col-md-12">
+		      <h5 class="text-muted"><%= markdown(@entry.textblock.to_s) %></h5>
+		    </div>
+		  </div>
 			
 	    </div>
 		

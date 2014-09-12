@@ -6,12 +6,15 @@ class StaticPagesController < ApplicationController
   end
 
   def help
+    @entities = Entity.all
   end
   
   def about
+    @entities = Entity.all
   end
   
   def contact
+    @entities = Entity.all
   end
   
   def dashboard

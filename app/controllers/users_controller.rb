@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       sign_in @user
       flash[:success] = "Welcome to PageMaker"
       @entities = Entity.all
-      redirect_to @user
+      redirect_to root_path
     else
       render 'new'
     end

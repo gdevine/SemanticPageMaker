@@ -93,7 +93,6 @@ class EntriesController < ApplicationController
     # create array to track already found field types
     fields_found = []
     
-    # @fieldlist = []
     if !@entry.field_instances.empty?
       for efield in @entry.field_instances
         
@@ -106,31 +105,40 @@ class EntriesController < ApplicationController
           @grouped_fields << field_list
           # add field type to those found already (so that future instance are added to this one)
           fields_found << efield.exposeAs
-                
-          # myhash = Hash.new
-          # myhash['label'] = efield.exposeAs
-          # myhash['predicate'] = (Field.find(efield.field_id)).property
-          # myhash['answer'] = efield.answer
-          # @fieldlist << myhash 
         else
           # retrieve the matching existing field_list
           field_list = @grouped_fields.find {|grouping| grouping["label"] == efield.exposeAs }
-          # add entry mini hash to entity_collection
+          # add entry mini hash to the collection
           field_list["answers"] << efield.answer          
         end
         
       end
     end
+    
+    # create a master array to contain all grouped entities
+    @grouped_entities = []    
+    # create array to track already found field types
+    entities_found = []
       
-    @entitylist = []
     if !@entry.entity_instances.empty?
       for ent in @entry.entity_instances
-        myhash = Hash.new
-        myhash['label'] = ent.exposeAs
-        # myhash['property'] = ent.property
-        myhash['predicate'] = ent.property
-        myhash['answer'] = ent.link_id
-        @entitylist << myhash 
+        
+        if !entities_found.include?(ent.exposeAs)
+          # entity type has not been found as of yet so create a new hash
+          entity_list = {"label" => ent.exposeAs, "predicate" => ent.property, "answers" => []}
+          # add current answer to this grouping
+          entity_list["answers"] << ent.link_id
+          # add me as a new member of the grouped_entities master array
+          @grouped_entities << entity_list
+          # add entity type to those found already (so that future instance are added to this one)
+          entities_found << ent.exposeAs
+        else
+          # retrieve the matching existing entity_list
+          entity_list = @grouped_entities.find {|grouping| grouping["label"] == ent.exposeAs }
+          # add entry mini hash to the collection
+          entity_list["answers"] << ent.link_id 
+        end
+        
       end
     end
     

@@ -35,17 +35,22 @@
 			  </div>
 			<% end %>
 	      <% end %>
-		
-		  <% for link in @entitylist %>
-			  <div class="row">  
+	      
+	      
+	      <% if @grouped_entities.any? %>	      
+		    <% @grouped_entities.each do |entity_group| %>
+		      <div class="row">  
 				<div class="col-md-12 topspace20">
-				  <legend><%= link['label'] %>(s)</legend>
+				  <legend><%= entity_group['label'] %>(s)</legend>
 				</div>
-				<div class="col-md-12">
-				  <h5 class="text-muted"><%= link_to Entry.find(link['answer']).slug.to_s, entry_url(link['answer']), 'property'=>link['predicate'] %></h5>
-				</div>
+				<% entity_group["answers"].each do |entity| %>
+					<div class="col-md-12">
+					  <h5 class="text-muted"><%= link_to Entry.find(entity).slug.to_s, entry_url(entity), 'property'=>entity_group['predicate'] %></h5>
+					</div>
+			    <% end %>
 			  </div>
-		  <% end%>
+			<% end %>
+	      <% end %>
 		  
 		  
 		  <legend class="topspace50">Text</legend>	

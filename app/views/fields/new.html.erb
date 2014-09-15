@@ -25,6 +25,7 @@
       <div class="col-lg-8">
         <%= f.text_field :property, class:"form-control" %>
       </div>
+      <span class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#PropertyHelp"></span>
     </div>
     
     <div class="form-group">
@@ -63,6 +64,21 @@
       </div>
       <div class="modal-body">
         FieldType is the type of this field, e.g. string, integer and will be exposed accordingly on webforms
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="PropertyHelp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Property</h4>
+      </div>
+      <div class="modal-body">
+        To enable Linked Data, a predicate 'property' can be assigned to wherever this field appears in a semantically enabled webpage 
       </div>
     </div>
   </div>

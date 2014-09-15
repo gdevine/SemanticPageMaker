@@ -48,13 +48,6 @@
 			    </div>
 			    
 			    <div class="form-group">
-			      <%= ef.label :multiple, "Allow multiple?", :class => "col-lg-2 control-label" %>
-			      <div class="col-lg-1 checkbox">
-			        <%= ef.check_box :multiple %>
-			      </div>
-			    </div>
-			    
-			    <div class="form-group">
 			      <%= ef.label :exposeAs, :class => "col-lg-2 control-label" %>
 			      <div class="col-lg-8">
 			        <%= ef.text_field :exposeAs, :class => "form-control" %>
@@ -80,7 +73,7 @@
       </div>
   </div>
   
-  <legend class="topspace50">Linked Entities</legend>
+  <legend class="topspace50">Linked Resources</legend>
   <div id="nest-100">
       <div class="items">
 	      <%= f.nested_fields_for :links, :id=>"duplicatable_nested_form" do |link| %>
@@ -96,13 +89,6 @@
 			      <%= link.label :property, 'Property type', class:"col-lg-2 control-label" %>
 			      <div class="col-lg-8">
 			        <%= link.text_field :property, {class:"form-control"} %>
-			      </div>
-			    </div>
-			    
-			    <div class="form-group">
-			      <%= link.label :multiple, "Allow multiple?", :class => "col-lg-2 control-label" %>
-			      <div class="col-lg-1 checkbox">
-			        <%= link.check_box :multiple %>
 			      </div>
 			    </div>
 			    

@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
+    <script type="application/ld+json"><%= yield(:jsonld) %></script>
   </head>
-  <body typeof="<%= @entity.typeof %>">
+  <body typeof="<%= @entity.typeof %>" about="<%= entry_url(@entry.id) %>">
     <%= render 'layouts/header' %>
     <div class="container">
       <%= render 'layouts/minibar' %>

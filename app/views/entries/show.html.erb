@@ -1,6 +1,9 @@
 <% provide(:title, 'Entry View') %>
 <% provide(:pageheading, @entry.slug) %>
 
+<% provide(:jsonld, @jsonld_text) %>
+
+
 <!-- Add edit/delete buttons if current user -->
 <% if current_user?(@entry.creator) %> 
   <div class="row"> 
@@ -20,6 +23,12 @@
 	<div class="row topspace20">
 		
 		<div class="col-md-9">
+		  <legend class="topspace50">Overview</legend>	
+		  <div class="row">  
+		    <div class="col-md-12">
+		      <h5 class="text-muted"><%= markdown(@entry.textblock.to_s) %></h5>
+		    </div>
+		  </div>	
 			
 	      <% if @grouped_fields.any? %>
             <% @grouped_fields.each do |field_group| %>
@@ -51,15 +60,6 @@
 			  </div>
 			<% end %>
 	      <% end %>
-		  
-		  
-		  <legend class="topspace50">Text</legend>	
-		
-		  <div class="row">  
-		    <div class="col-md-12">
-		      <h5 class="text-muted"><%= markdown(@entry.textblock.to_s) %></h5>
-		    </div>
-		  </div>
 			
 	    </div>
 		

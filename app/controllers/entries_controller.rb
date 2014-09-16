@@ -4,8 +4,6 @@ class EntriesController < ApplicationController
   
   def index        
     # Index returns entries broken down by entity type     
-      
-    @entries = Entry.paginate(page: params[:page])
     
     # create array to track already found entity types
     entities_completed = entity_entries = []
@@ -38,6 +36,29 @@ class EntriesController < ApplicationController
     end
       
     @entities = Entity.all
+    
+    respond_to do |format|
+      format.html
+      format.json do
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        @jsonld_text = view_context.create_jsonld_allentries(@entity, @entry, @grouped_fields, @grouped_entities)
+        render :json => @jsonld_text 
+      end
+    end
+    
   end
   
   def new
@@ -86,66 +107,19 @@ class EntriesController < ApplicationController
   end
   
   def show
-    @entry = Entry.find(params[:id])
-    
-    # create a master array to contain all grouped fields
-    @grouped_fields = []    
-    # create array to track already found field types
-    fields_found = []
-    
-    if !@entry.field_instances.empty?
-      for efield in @entry.field_instances
-        
-        if !fields_found.include?(efield.exposeAs)
-          # field type has not been found as of yet so create a new hash
-          field_list = {"label" => efield.exposeAs, "predicate" => (Field.find(efield.field_id)).property, "answers" => []}
-          # add current answer to this grouping
-          field_list["answers"] << efield.answer
-          # add me as a new member of the grouped_fields master array
-          @grouped_fields << field_list
-          # add field type to those found already (so that future instance are added to this one)
-          fields_found << efield.exposeAs
-        else
-          # retrieve the matching existing field_list
-          field_list = @grouped_fields.find {|grouping| grouping["label"] == efield.exposeAs }
-          # add entry mini hash to the collection
-          field_list["answers"] << efield.answer          
-        end
-        
-      end
-    end
-    
-    # create a master array to contain all grouped entities
-    @grouped_entities = []    
-    # create array to track already found field types
-    entities_found = []
-      
-    if !@entry.entity_instances.empty?
-      for ent in @entry.entity_instances
-        
-        if !entities_found.include?(ent.exposeAs)
-          # entity type has not been found as of yet so create a new hash
-          entity_list = {"label" => ent.exposeAs, "predicate" => ent.property, "answers" => []}
-          # add current answer to this grouping
-          entity_list["answers"] << ent.link_id
-          # add me as a new member of the grouped_entities master array
-          @grouped_entities << entity_list
-          # add entity type to those found already (so that future instance are added to this one)
-          entities_found << ent.exposeAs
-        else
-          # retrieve the matching existing entity_list
-          entity_list = @grouped_entities.find {|grouping| grouping["label"] == ent.exposeAs }
-          # add entry mini hash to the collection
-          entity_list["answers"] << ent.link_id 
-        end
-        
-      end
-    end
-    
+    @entry = Entry.find(params[:id])   
     @entity = Entity.find(@entry.entity_id)
+         
+    @grouped_fields, @grouped_entities = view_context.create_entry_info(@entry)
+    @jsonld_text = view_context.create_jsonld_entry(@entity, @entry, @grouped_fields, @grouped_entities)
+    
     @entities = Entity.all
     
-    render :layout => 'entry_layout'
+    respond_to do |format|
+      format.html { render :layout => 'entry_layout' }
+      format.json { render :json => @jsonld_text }
+    end
+    
   end
   
   def destroy
